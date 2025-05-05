@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  document-parser:
+    build: .
+    container_name: document-parser
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: node src/service.js

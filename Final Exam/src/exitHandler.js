@@ -1,6 +1,6 @@
 module.exports = {
     setSafeExits: () => {
-        // Handle normal exit
+        // Handle normal program exit (when process.exit is called or script finishes)
         process.on('exit', (code) => {
             console.info();
             // Blue
@@ -8,7 +8,7 @@ module.exports = {
             console.info();
         });
 
-        // Handle Ctrl+C
+        // Handle Ctrl+C (SIGINT) signal from the keyboard to shut down
         process.on('SIGINT', () => {
             console.info();
             // Orange
@@ -18,7 +18,7 @@ module.exports = {
             process.exit();
         });
 
-        // Handle kill signal
+        // Handle kill signal (SIGTERM) from the operating system or server
         process.on('SIGTERM', () => {
             console.info();
             // Blue
@@ -28,7 +28,7 @@ module.exports = {
             process.exit();
         });
 
-        // Handle uncaught exceptions
+        // Handle unexpected errors that weren’t caught earlier
         process.on('uncaughtException', (err) => {
             console.info();
             // Red
@@ -38,7 +38,7 @@ module.exports = {
             process.exit(1);
         });
 
-        // Optional: run before exiting but allow async I/O
+        // Optional: runs before exiting to signal the process will end soon
         process.on('beforeExit', (code) => {
             console.info();
             // Orange
